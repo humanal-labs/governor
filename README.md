@@ -47,7 +47,7 @@ Safer agents.
 ⸻
 
 Quick start
-git clone https://github.com/[sen]/interruption-layer
+git clone https://github.com/humanal-labs/interruption-layer
 cd interruption-layer
 python demo.py
 Zero dependencies. Minimal code.
