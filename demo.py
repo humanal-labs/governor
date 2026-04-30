@@ -16,3 +16,4 @@ def run_action(action, confidence):
 run_action("ls", 0.9)
 run_action("cd /", 0.9)
 run_action("rm -rf /", 0.4)
+run_action("DELETE FROM users;", 0.9)
