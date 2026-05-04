@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Trace:
     ts: str
@@ -32,12 +33,15 @@ def governor(trace: Trace):
     if len(signals) >= 2:
         return {
             "action": "PAUSE",
-            "timestamp": trace.ts,
             "signals": signals,
             "reason": "early drift detected",
         }
 
-    return {"action": "CONTINUE", "timestamp": trace.ts}
+    return {
+        "action": "CONTINUE",
+        "signals": [],
+        "reason": None,
+    }
 
 
 traces = [
@@ -61,8 +65,8 @@ for trace in traces:
     )
 
     if decision["action"] == "PAUSE":
-        print(f"\nGOVERNOR TRIGGERED at {trace.ts}")
+        print(f"\n⚠️ GOVERNOR TRIGGERED at {trace.ts}")
         print(f"Signals: {', '.join(decision['signals'])}")
-        print("Reason: early drift detected")
-        print("Paused before the 02:14 failure could compound.")
+        print("Action: PAUSE — second-look required")
+        print("Impact: paused before the 02:14 failure could compound")
         break
