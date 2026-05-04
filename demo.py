@@ -1,46 +1,68 @@
-import time
+from dataclasses import dataclass
 
-def should_interrupt(task):
-    # Rule 1: destructive commands
-    if task["tool"] == "bash" and "rm -rf" in task["cmd"]:
-        return True, "Destructive command"
-
-    # Rule 2: low confidence + high cost
-    if task["confidence"] < 0.7 and task["cost"] > 500:
-        return True, "Low confidence, high cost"
-
-    return False, None
+@dataclass
+class Trace:
+    ts: str
+    action: str
+    retry: int
+    latency_ms: int
+    actions_per_min: float
+    result: str
 
 
-def governor(task):
-    interrupt, reason = should_interrupt(task)
-
-    if interrupt:
-        print(f"\n⚠️ GOVERNOR TRIGGERED: {reason}")
-        print("Pausing for 10 seconds...\n")
-
-        # Simulated pause (can be replaced with human approval)
-        time.sleep(3)
-
-        print("Action requires review before execution.\n")
-        return False
-    else:
-        print(f"\n✅ Executed: {task['cmd']} (cost: ${task['cost']})\n")
-        return True
+BASELINE = {
+    "retry_p95": 1,
+    "latency_median": 120,
+    "tempo_median": 8.2,
+}
 
 
-# ---- Simulation ---- #
+def governor(trace: Trace):
+    signals = []
 
-tasks = [
-    {"tool": "api", "cmd": "check_inventory", "confidence": 0.95, "cost": 5},
-    {"tool": "api", "cmd": "place_order", "confidence": 0.65, "cost": 18000},
-    {"tool": "bash", "cmd": "rm -rf /data", "confidence": 0.9, "cost": 0},
-    {"tool": "api", "cmd": "update_status", "confidence": 0.98, "cost": 2},
+    if trace.retry > BASELINE["retry_p95"] * 2:
+        signals.append("retry spike")
+
+    if trace.latency_ms > BASELINE["latency_median"] * 1.4:
+        signals.append("latency drift")
+
+    if trace.actions_per_min < BASELINE["tempo_median"] / 3:
+        signals.append("tempo shift")
+
+    if len(signals) >= 2:
+        return {
+            "action": "PAUSE",
+            "timestamp": trace.ts,
+            "signals": signals,
+            "reason": "early drift detected",
+        }
+
+    return {"action": "CONTINUE", "timestamp": trace.ts}
+
+
+traces = [
+    Trace("01:55", "weld_check", 0, 118, 8.1, "pass"),
+    Trace("01:56", "weld_check", 0, 121, 8.3, "pass"),
+    Trace("01:57", "weld_check", 1, 145, 7.9, "pass"),
+    Trace("01:58", "weld_check", 3, 180, 2.1, "pass"),
+    Trace("01:59", "weld_check", 4, 210, 1.8, "pass"),
+    Trace("02:14", "weld_check", 5, 340, 1.2, "FAIL - $18k"),
 ]
 
-print("=== Running Agent Simulation ===\n")
 
-for t in tasks:
-    governor(t)
+for trace in traces:
+    decision = governor(trace)
 
-print("\n=== End ===")
+    print(
+        f"{trace.ts} | retry={trace.retry} | "
+        f"latency={trace.latency_ms}ms | "
+        f"tempo={trace.actions_per_min}/min | "
+        f"{decision['action']}"
+    )
+
+    if decision["action"] == "PAUSE":
+        print(f"\nGOVERNOR TRIGGERED at {trace.ts}")
+        print(f"Signals: {', '.join(decision['signals'])}")
+        print("Reason: early drift detected")
+        print("Paused before the 02:14 failure could compound.")
+        break
