@@ -1,107 +1,98 @@
-# Interruption Layer
+Interruption Layer
 
-Stops risky agent actions **before execution**.
+A digital buffer for autonomous agents.
 
-Agents are getting better at deciding what to do.
+In real systems, control doesn’t only come from formal checks.
 
-But they still don’t know when **not** to do it.
+It comes from small, informal moments:
+a second look,
+a hesitation,
+a pause before passing something on.
 
-That’s where things break.
+These are not designed.
+But they act as a buffer.
 
----
+⸻
 
-## Demo
+The Problem
 
-```bash
-$ python demo.py
+When systems speed up, these are the first things to disappear.
 
-Interruption Layer Demo
------------------------
+People trust the system more.
+Or move things through to keep flow.
 
-Case 1: Safe action
-[EXECUTED] ls
+What remains is fast execution,
+without the moment that catches drift.
 
-Case 2: Low-confidence risky shell command
-[INTERRUPTED] Low confidence (0.4) on risky action
-  action: rm -rf /
+Individually correct.
+Systemically wrong.
 
-Case 3: Dangerous SQL
-[INTERRUPTED] Dangerous SQL detected
-  action: DELETE FROM users;
+Executed in sequence, each action looks reasonable.
 
-Case 4: Repeated loop
-[EXECUTED] retry deploy
-[EXECUTED] retry deploy
-[EXECUTED] retry deploy
-[INTERRUPTED] Loop detected
-  action: retry deploy
+Executed at speed, they drift.
 
-Summary
--------
-Agents can execute before humans can react.
-This layer interrupts risky actions before they run.
-What it does
+⸻
 
-This prototype catches three simple failure modes:
+The Fix
 
-1. Destructive shell commands
-    rm -rf / → interrupted
-2. Dangerous SQL
-    DELETE FROM users; → interrupted
-3. Repeated action loops
-    same action repeated → interrupted
+We don’t add friction everywhere.
+
+We restore the missing moment.
+
+A lightweight interruption,
+triggered only when signals suggest drift.
+
+Not a blocker.
+A control point.
+
+⸻
+
+Example
+
+A single action:
+
+task = {
+“tool”: “api”,
+“cmd”: “place_order”,
+“confidence”: 0.65,
+“cost”: 18000
+}
+
+Individually, it looks correct.
+
+Now apply the interruption:
+
+def should_interrupt(task):
+if task[“tool”] == “bash” and “rm -rf” in task[“cmd”]:
+return True, “Destructive command”
+
+if task["confidence"] < 0.7 and task["cost"] > 500:
+    return True, "Low confidence, high cost"
+
+return False, None
+
+interrupt, reason = should_interrupt(task)
+
+if interrupt:
+print(f”PAUSED: {reason}”)
+
+Output:
+
+PAUSED: Low confidence, high cost
+
+⸻
+
+At small scale, this is nothing.
+
+At scale, this is the difference between a normal system
+and one that drifts without correction.
 
 ⸻
 
 Why it matters
 
-Execution is getting cheaper.
+No single action is wrong.
 
-The cost of a wrong action is going up.
+The system drifts.
 
-Agents don’t only suggest anymore.
-They can act.
-
-That means safety has to exist before execution, not after damage.
-
-⸻
-
-Core idea
-
-Not smarter agents.
-
-Safer execution.
-
-⸻
-
-Quick start
-git clone https://github.com/humanal-labs/interruption-layer
-cd interruption-layer
-python demo.py
-Zero dependencies.
-
-⸻
-
-Status
-
-Early prototype.
-
-Naive rules.
-Hardcoded checks.
-False positives and false negatives are possible.
-
-Do not use in production.
-
-⸻
-
-Direction
-
-From:
-
-Can the agent do it?
-
-To:
-
-Should the agent be allowed to run it?
-
-This is an early attempt at that missing layer.
+This brings back the moment where it can correct itself.
