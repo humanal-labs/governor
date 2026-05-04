@@ -100,7 +100,24 @@ At scale, this is the difference between a normal system
 and one that drifts without correction.
 
 ⸻
+## Demo
 
+```bash
+python demo.py
+Simulates an agent executing actions at speed.
+
+* Low-risk actions pass through
+* High-cost, low-confidence actions trigger a pause
+* Destructive commands are intercepted
+
+Example output:
+
+⚠️ GOVERNOR TRIGGERED: Low confidence, high cost
+Pausing for 10 seconds…
+Action requires review before execution.
+
+At small scale, each action looks fine.
+At scale, this prevents drift before it compounds.
 Why it matters
 
 No single action is wrong.
