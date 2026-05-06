@@ -65,29 +65,21 @@ Meaningful when it shows up.
 
 ---
 
-## How It Works: Observable Drift
+## How it works
 
-Governor moves beyond abstract signals.
+Governor watches three observable signals:
 
-It watches for observable drift:
+1. Behavior change
+2. Result drift
+3. Tempo shift
 
-1. **Behaviour Change**  
-   The agent does something outside its normal pattern.
+If two of the three signals move outside the expected baseline,
+Governor recommends review before the workflow continues.
 
-2. **Result Drift**  
-   Cost, time, or output moves outside its baseline.
+It does not decide for the agent.
+It does not replace the human.
 
-3. **Tempo Shift**  
-   A step takes much longer than expected.
-
-Governor triggers only when multiple signals line up.
-
-This keeps it:
-
-- Quiet most of the time  
-- Trusted when it appears  
-
----
+It opens the second-look moment.
 ## Signal Design
 
 Governor does not rely only on abstract signals.
