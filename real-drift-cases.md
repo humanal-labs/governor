@@ -87,5 +87,29 @@ Recovery mechanism becomes the drift source itself.
 
 Possible Review Point:
 Escalate to human review after repeated identical crash paths.
+---
+## Case 004 — Session continuity silently lost after restart
+
+### Source
+OpenHands issue:
+"ACP: conversations cannot be resumed after sandbox restart (session_id is not persisted)"
+
+### Drift Pattern
+The system appears operational after restart, but conversational continuity is silently broken because session identity is lost.
+
+### Human Observation
+The user likely notices only after attempting to continue work. The interface still appears alive, but historical context and continuity are gone.
+
+### What Created False Confidence?
+The restart succeeds technically, creating the illusion of recovery, while hidden conversational state was never restored.
+
+### Potential Signals
+- sudden context discontinuity
+- missing session linkage
+- reset conversation identity
+- successful restart without continuity validation
+
+### Governor Relevance
+Governor could require continuity validation checkpoints after recovery events instead of assuming restart success equals operational recovery.
 
 Add human observation patterns to drift cases
