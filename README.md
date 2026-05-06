@@ -1,32 +1,33 @@
 # Governor
 
-> "You don't lose control straight away.  
-> You just lose the early warning."  
-> — Manufacturing principle
+Governor introduces review points before silent drift becomes operational cost.
 
-The missing control point for autonomous systems.
+It is not designed to make agents smarter.
+It is designed to restore the pause before expensive mistakes compound.
 
-In physical systems, control doesn’t only come from formal rules.
+The system can observe change,
+but it cannot decide alone what should be considered normal.
 
-It comes from small, informal moments:  
-a second look, a hesitation, a pause before passing something on.
+## Why
 
-These aren’t designed.  
-But they act as a buffer.
+Agent systems often fail quietly.
 
-In manufacturing, they show up as:  
-machine cycles, handover points, informal checks.
+A single action may look correct.
+A single tool call may succeed.
+A single step may pass.
 
-They slow things down just enough to catch drift.
+But across the workflow, behavior can drift:
 
-Agents removed these for speed.
+- retries increase
+- latency shifts
+- tempo changes
+- assumptions persist
+- small corrections become normal
 
-What remains is fast execution —  
-without the moment that corrects the system.
+Individually correct.
+Systemically wrong.
 
-Governor brings that moment back.
-
----
+Governor adds a review point before that drift compounds into operational cost.
 
 ## The Problem
 
