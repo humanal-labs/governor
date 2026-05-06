@@ -87,3 +87,5 @@ Recovery mechanism becomes the drift source itself.
 
 Possible Review Point:
 Escalate to human review after repeated identical crash paths.
+
+Add human observation patterns to drift cases
