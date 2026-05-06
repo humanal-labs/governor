@@ -136,6 +136,30 @@ The interface preserved the illusion of successful execution by failing silently
 
 ### Governor Relevance
 Governor could validate execution continuity between user intent and downstream system acknowledgment instead of assuming UI submission equals operational success.
+---
 
+## Case 006 — Rejected tool calls still execute despite human review
+
+### Source
+LangGraph issue:
+"HumanInTheLoopMiddleware executes rejected tool calls in LangGraph's ToolNode"
+
+### Drift Pattern
+The system presents a human approval/rejection checkpoint, but rejected actions may still execute downstream, breaking the integrity of the review process.
+
+### Human Observation
+The operator believes intervention successfully stopped execution. The mismatch may only become visible later through unexpected side effects or downstream behavior.
+
+### What Created False Confidence?
+The interface and workflow implied that human rejection was authoritative, while execution state diverged internally.
+
+### Potential Signals
+- rejected actions appearing in execution logs
+- mismatch between approval state and execution trace
+- downstream side effects after rejection
+- inconsistent review-state synchronization
+
+### Governor Relevance
+Governor could validate execution integrity after review checkpoints instead of assuming human intervention automatically propagates through operational state.
 
 Add human observation patterns to drift cases
