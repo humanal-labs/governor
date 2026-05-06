@@ -162,4 +162,29 @@ The interface and workflow implied that human rejection was authoritative, while
 ### Governor Relevance
 Governor could validate execution integrity after review checkpoints instead of assuming human intervention automatically propagates through operational state.
 
+---
+## Case 007 — Tool execution continues after semantic intent collapse
+
+### Source
+Issue:
+"_parse_native_tool_call drops Bedrock Converse API tool arguments — always passes empty dict"
+
+### Drift Pattern
+The system continues executing tool calls even though the original operational intent has been silently lost during argument parsing.
+
+### Human Observation
+The operator sees successful execution traces and active tool usage, but downstream results appear incomplete, inconsistent, or meaningless.
+
+### What Created False Confidence?
+Execution activity remained visible, creating the illusion that operational intent survived intact despite silent argument collapse.
+
+### Potential Signals
+- empty tool payloads
+- execution traces without semantic effect
+- successful tool invocation with null operational outcome
+- mismatch between requested action and downstream state
+
+### Governor Relevance
+Governor could validate semantic continuity between intended action and executable payload instead of assuming successful invocation preserves operational meaning.
+
 Add human observation patterns to drift cases
