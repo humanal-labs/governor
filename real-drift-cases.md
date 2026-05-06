@@ -112,4 +112,30 @@ The restart succeeds technically, creating the illusion of recovery, while hidde
 ### Governor Relevance
 Governor could require continuity validation checkpoints after recovery events instead of assuming restart success equals operational recovery.
 
+---
+## Case 005 — Message silently dropped without visible failure
+
+### Source
+OpenHands issue:
+"Send button silently drops attachment-only chat messages"
+
+### Drift Pattern
+The system accepts user interaction and appears functional, but the actual payload is never processed or delivered.
+
+### Human Observation
+The user believes the message was successfully sent because no visible failure occurs. The missing action is only discovered later through absence of response or workflow inconsistency.
+
+### What Created False Confidence?
+The interface preserved the illusion of successful execution by failing silently instead of surfacing uncertainty or validation errors.
+
+### Potential Signals
+- missing downstream acknowledgment
+- no resulting agent activity
+- interaction recorded without execution trace
+- silent payload discard
+
+### Governor Relevance
+Governor could validate execution continuity between user intent and downstream system acknowledgment instead of assuming UI submission equals operational success.
+
+
 Add human observation patterns to drift cases
