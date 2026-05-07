@@ -261,6 +261,40 @@ Health-check infrastructure validated service availability rather than operation
 
 ### Governor Relevance
 Governor could compare operational throughput against health-state assumptions instead of treating service availability as proof of functional execution integrity.
+### Example Timeline — Health Illusion
+
+Observed in Case 010.
+
+```text
+Normal state
+↓
+execution begins slowing down
+↓
+task timeouts start
+↓
+health endpoint still reports healthy
+↓
+recovery loops increase
+↓
+human notices latency
+↓
+actual execution failure is discovered
+
+Governor Review Point
+
+The review point should happen at:recovery loops increase
+At this stage, the system may still appear healthy externally, but operational behavior has already started to drift.
+
+Why This Matters
+
+Human detection usually happens too late.
+
+The operator often notices the problem only after latency becomes visible or output stops appearing.
+
+Governor should watch for the gap between:reported health and operational throughput
+The goal is not to wait for visible failure.
+
+The goal is to surface review before false health becomes operational cost.
 --
 ## Case 011 — System layers disagree on operational state
 
@@ -315,6 +349,13 @@ The absence of explicit failure signals preserved the illusion that the agent mi
 Governor could identify operational inactivity windows and surface ambiguity states instead of allowing silent non-progress to masquerade as temporary execution delay.
 
 --
+### Design Warning
+
+This case is a reminder that guardrails can create false confidence when their represented policy diverges from runtime behavior.
+
+Governor must not assume that the existence of a review point means control actually happened.
+
+A control layer also needs verification.
 ## Case 013 — Guardrail representation diverges from actual execution behavior
 
 ### Source
@@ -338,6 +379,7 @@ The existence of visible governance controls created the impression of reliable 
 
 ### Governor Relevance
 Governor could continuously validate alignment between represented governance constraints and actual runtime execution behavior instead of assuming configuration implies enforcement.
+A control layer also needs verification.
 
 Add human observation patterns to drift cases--
 
