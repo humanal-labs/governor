@@ -265,7 +265,7 @@ Governor could compare operational throughput against health-state assumptions i
 
 Observed in Case 010.
 
-```text
+``
 Normal state
 ↓
 execution begins slowing down
