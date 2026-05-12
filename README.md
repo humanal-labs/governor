@@ -146,6 +146,12 @@ PAUSED: Low confidence, high cost
 
 ## Demo
 
+## Case 011 — State Desynchronization
+
+Frontend reported active startup while backend remained IDLE/READY.
+
+Governor detected cross-layer state incoherence and triggered STOP before operators debugged the wrong subsystem.
+
 ```bash
 python demo.py
 ```
