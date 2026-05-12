@@ -11,6 +11,7 @@ but it cannot decide alone what should be considered normal.
 ## Why
 
 The behaviour tells you what's about to happen
+
 Agent systems often fail quietly.
 
 A single action may look correct.
