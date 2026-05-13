@@ -1,7 +1,7 @@
 import json
 import time
 
-with open("case_010.log", "r") as file:
+with open("cases/case_010_health_illusion/case_010_log", "r") as file:
     log = json.load(file)
 
 print("\n=== Governor Runtime Check ===\n")
