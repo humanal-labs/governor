@@ -74,6 +74,16 @@ Meaningful when it shows up.
 | 010 | Dead Execution | System healthy, execution stopped |
 | 011 | State Desync | Frontend/backend disagreement |
 | 012 | Silent Stall | Session active, no progress |
+--
+## Runtime Replays
+
+| Case | Pattern | Result |
+|---|---|---|
+| Case 010 | Health Illusion | STOP |
+| Case 011 | State Desync | REVIEW |
+| Case 012 | Silent Stall | REVIEW |
+
+Governor detects operational drift before visible failure appears.
 
 ## How it works
 
