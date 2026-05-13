@@ -67,6 +67,14 @@ Meaningful when it shows up.
 
 ---
 
+## Cases
+
+| Case | Pattern | Description |
+|------|------|------|
+| 010 | Dead Execution | System healthy, execution stopped |
+| 011 | State Desync | Frontend/backend disagreement |
+| 012 | Silent Stall | Session active, no progress |
+
 ## How it works
 
 Governor watches three observable signals:
