@@ -1,1 +1,21 @@
+{
+  "case_id": "011",
+  "name": "System layers disagree on operational state",
+  "source": "OpenHands issue: Self-hosted UI stuck on Starting/Loading while backend conversation is IDLE",
+  "signals": {
+    "frontend_state": "STARTING",
+    "ui_status": "Loading...",
+    "backend_conversation_state": "IDLE",
+    "app_conversation_task": "READY",
+    "runtime_heartbeat": "alive",
+    "explicit_error": false
+  },
+  "expected_behavior": "Frontend, backend, and orchestration state should converge.",
+  "observed_behavior": "Frontend implies active initialization while backend reports idle/ready state.",
+  "drift_pattern": "State Desynchronization",
+  "governor_rule": "If frontend indicates active startup while backend is idle or ready for too long, flag cross-layer coherence failure.",
+  "drift_detected": true,
+  "action": "STOP",
+  "reason": "System layers report contradictory operational states."
+}
 
