@@ -1,0 +1,23 @@
+{
+  "timestamp": "09:23:11",
+  "case_id": "012",
+  "case_name": "silent_stall_without_visible_failure",
+
+  "session_state": "ACTIVE",
+  "message_state": "SENT",
+  "agent_state": "IDLE",
+
+  "output_progression": "NONE",
+  "terminal_state": "ABSENT",
+
+  "explicit_error": false,
+  "operator_feedback": "NONE",
+
+  "drift_pattern": "Silent Stall",
+
+  "governor": {
+    "drift_detected": true,
+    "action": "REVIEW",
+    "reason": "Session appears active but no meaningful execution progress is occurring."
+  }
+}
