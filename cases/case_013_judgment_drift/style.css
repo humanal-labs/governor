@@ -7,7 +7,11 @@ body {
   min-height: 100vh;
   background: #050607;
   color: #e8e8e8;
+<<<<<<< HEAD
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+=======
+  font-family: Consolas, "SFMono-Regular", monospace;
+>>>>>>> db852d1 (Add Case 013 — Judgment Drift)
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,9 +19,15 @@ body {
 
 .console {
   width: 1080px;
+<<<<<<< HEAD
   height: 1350px;
   padding: 72px;
   background: radial-gradient(circle at top left, #111820, #050607 55%);
+=======
+  min-height: 1350px;
+  padding: 72px;
+  background: radial-gradient(circle at top left, #111820, #050607 60%);
+>>>>>>> db852d1 (Add Case 013 — Judgment Drift)
   border: 1px solid #20252b;
 }
 
@@ -26,18 +36,49 @@ body {
   justify-content: space-between;
   color: #8b949e;
   font-size: 28px;
+<<<<<<< HEAD
   margin-bottom: 80px;
+=======
+  margin-bottom: 60px;
+}
+
+.alert {
+  border: 2px solid #ff6868;
+  background: rgba(255, 104, 104, 0.08);
+  color: #ff6868;
+  padding: 34px;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 28px;
+}
+
+.action {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 45px;
+}
+
+.action span {
+  color: #8b949e;
+  font-weight: 400;
+>>>>>>> db852d1 (Add Case 013 — Judgment Drift)
 }
 
 h1 {
   font-size: 72px;
+<<<<<<< HEAD
   margin: 0 0 70px;
+=======
+  margin: 0 0 60px;
+>>>>>>> db852d1 (Add Case 013 — Judgment Drift)
   letter-spacing: -2px;
 }
 
 .status,
 .metrics,
 .analysis,
+<<<<<<< HEAD
 .alert {
   border-top: 1px solid #252b31;
   padding-top: 42px;
@@ -61,17 +102,56 @@ h1 {
 
 .red {
   color: #ff4d4d;
+=======
+.log {
+  border-top: 1px solid #30363d;
+  padding-top: 38px;
+  margin-top: 38px;
+}
+
+.status p {
+  font-size: 34px;
+  font-weight: 700;
+  margin: 18px 0;
+}
+
+.green {
+  color: #6dff8b;
+}
+
+.red {
+  color: #ff6868;
+}
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  width: 520px;
+  font-size: 30px;
+  font-weight: 700;
+>>>>>>> db852d1 (Add Case 013 — Judgment Drift)
 }
 
 .analysis p {
   color: #8b949e;
   font-size: 26px;
+<<<<<<< HEAD
   margin: 36px 0 10px;
+=======
+  margin: 34px 0 10px;
+>>>>>>> db852d1 (Add Case 013 — Judgment Drift)
 }
 
 .analysis h2 {
   font-size: 38px;
   line-height: 1.35;
+<<<<<<< HEAD
   font-weight: 500;
   margin: 0;
 }
@@ -99,3 +179,15 @@ h1 {
   color: #c9d1d9;
   font-size: 28px;
 }
+=======
+  font-weight: 600;
+  margin: 0;
+}
+
+.log {
+  color: #c9d1d9;
+  font-size: 26px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+>>>>>>> db852d1 (Add Case 013 — Judgment Drift)
