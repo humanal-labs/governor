@@ -189,8 +189,7 @@ drift_signals = {
     "retry_count": retries,
     "output_variance": deviation_from_expected,
     "behavior_change": is_new_pattern
-}
-Example
+## Example
 
 A single action:task = {
     "tool": "api",
@@ -200,6 +199,7 @@ A single action:task = {
 }
 Individually, it looks correct.
 Now apply the governor:def should_pause(task):
+
     if task["confidence"] < 0.7 and task["cost"] > 500:
         return True, "Low confidence, high cost"
     return False, None
