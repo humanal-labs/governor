@@ -191,15 +191,19 @@ drift_signals = {
     "behavior_change": is_new_pattern
 ## Example
 
-A single action:task = {
+A single action:
+
+```python
+task = {
     "tool": "api",
     "cmd": "place_order",
     "confidence": 0.65,
     "cost": 18000
 }
-Individually, it looks correct.
-Now apply the governor:def should_pause(task):
-
+  Individually, it looks correct.
+  
+  Now apply the governor:
+  def should_pause(task):
     if task["confidence"] < 0.7 and task["cost"] > 500:
         return True, "Low confidence, high cost"
     return False, None
@@ -208,26 +212,25 @@ pause, reason = should_pause(task)
 
 if pause:
     print(f"PAUSED: {reason}")
-    Output:PAUSED: Low confidence, high cost
-    Demo
+Output:Demo
 
 Case 011 — State Desynchronization
 
 Frontend reported active startup while backend remained IDLE/READY.
 
-Governor detected cross-layer state incoherence and triggered STOP before operators investigated the wrong subsystem.
-python demo.py
-
+Governor detected cross-layer state incoherence and triggered REVIEW before operators investigated the wrong subsystem.
+Run:python core/demo.py
 Simulation behavior:
+
 * low-risk actions pass through
 * high-cost uncertain actions trigger review
 * drift signals surface before execution compounds
-Example output:⚠️ GOVERNOR TRIGGERED
-Cost: $18,000
-Confidence: 0.62
 
-Drift risk detected.
-Action requires review before execution.
+Example output:
+⚠️ GOVERNOR TRIGGERED
+Reason: High confidence masking degraded verification
+Action: REVIEW
+
 Why It Matters
 
 At small scale, nothing looks wrong.
