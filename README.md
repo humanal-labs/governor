@@ -99,16 +99,29 @@ Meaningful when it appears.
 
 ---
 
-## Current Cases
+## Cases
 
 | Case | Pattern | Description |
 |------|------|------|
-| 010 | Health Illusion | System reports healthy while meaningful execution collapses |
-| 011 | State Desync | Frontend and backend disagree on operational state |
-| 012 | Silent Stall | Session remains active while useful progress stops |
-| 013 | Judgment Drift | Verification quality degrades while operational flow continues |
+| 010 | Dead Execution | System healthy, execution stopped |
+| 011 | State Desync | Frontend/backend disagreement |
+| 012 | Silent Stall | Session active, no progress |
 
----
+## Drift Taxonomy
+
+Governor organizes operational drift into observable runtime patterns.
+
+See:
+- Silent Failure Drift
+- Semantic Drift
+- Governance Drift
+- Observability Drift
+- Recursive Drift
+- State Desynchronization
+- Recovery Drift
+
+Full taxonomy:
+`taxonomy/drift_taxonomy.md`
 
 ## Runtime Replays
 
