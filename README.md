@@ -82,6 +82,19 @@ Governor is not:
 It is an operational drift detection layer.
 
 ---
+## Quick Start
+
+Run the demo:
+
+```bash
+python core/demo.py
+Governor simulates runtime drift signals and triggers REVIEW or STOP before silent failure compounds.
+
+Example output:⚠️ GOVERNOR TRIGGERED
+Reason: High confidence masking degraded verification
+Action: REVIEW
+
+---
 
 ## The Fix
 
