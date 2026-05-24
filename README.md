@@ -189,6 +189,9 @@ drift_signals = {
     "retry_count": retries,
     "output_variance": deviation_from_expected,
     "behavior_change": is_new_pattern
+}
+```
+
 ## Example
 
 A single action:
@@ -200,10 +203,14 @@ task = {
     "confidence": 0.65,
     "cost": 18000
 }
-  Individually, it looks correct.
-  
-  Now apply the governor:
-  def should_pause(task):
+```
+
+Individually, it looks correct.
+
+Now apply the governor:
+
+```python
+def should_pause(task):
     if task["confidence"] < 0.7 and task["cost"] > 500:
         return True, "Low confidence, high cost"
     return False, None
@@ -212,13 +219,24 @@ pause, reason = should_pause(task)
 
 if pause:
     print(f"PAUSED: {reason}")
-Output:Demo
+```
 
-Case 011 — State Desynchronization
+Output:
+
+```text
+PAUSED: Low confidence, high cost
+```
+
+---
+
+## Demo
+
+### Case 011 — State Desynchronization
 
 Frontend reported active startup while backend remained IDLE/READY.
 
 Governor detected cross-layer state incoherence and triggered REVIEW before operators investigated the wrong subsystem.
+
 Run:python core/demo.py
 Simulation behavior:
 
