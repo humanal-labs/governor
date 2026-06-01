@@ -1,0 +1,7 @@
+{
+  "queue_growth": 0.82,
+  "execution_drop": 0.71,
+  "rollback_cluster": true,
+  "escalation_spike": true,
+  "health_status": "green"
+}
