@@ -66,6 +66,7 @@ Execution:
 ```bash
 python cases/case_014_retry_loop_drift/governor.py
 ```
+"suggestion": "Require strategy mutation before next retry. Consider circuit breaker or exponential backoff with jitter."
 
 Output:
 

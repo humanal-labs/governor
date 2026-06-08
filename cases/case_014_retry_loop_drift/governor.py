@@ -32,6 +32,10 @@ if snapshot["elapsed_minutes"] > 30:
     score += 10
     reasons.append("retry_loop_duration_exceeded")
 
+if snapshot["last_error"] == "tool_timeout" and snapshot["attempt_count"] > 5:
+    score += 10
+    reasons.append("repeated_same_error")
+
 if score >= 70:
     action = "ESCALATE"
 elif score >= 40:
@@ -42,7 +46,7 @@ else:
 result = {
     "signal_score": score,
     "action": action,
-    "reasons": reasons
+    "reasons": reasons,
+    "suggestion": "Require strategy mutation before next retry. Consider circuit breaker or exponential backoff with jitter."
 }
-
 print(result)
