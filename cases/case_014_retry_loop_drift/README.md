@@ -1,10 +1,10 @@
 # Case 014 — Retry Loop Drift
 
-The system repeatedly retries a failed task without proving that anything has changed.
+The system repeatedly retries a failed task without demonstrating that anything meaningful changed between attempts.
 
 The failure is not the first error.
 
-The failure is continuing to retry when the system cannot demonstrate state change, verification improvement, or progress.
+The failure is continuing to retry while state, strategy, verification, and progress remain effectively unchanged.
 
 ## Pattern
 
@@ -25,19 +25,39 @@ But the system cannot answer:
   "task_id": "task_014",
   "attempt_count": 12,
   "state_changed": false,
+  "strategy_changed": false,
   "verification_delta": 0,
   "progress_delta": 0,
   "last_error": "tool_timeout",
   "elapsed_minutes": 35
 }
-Detection Logic
+```
 
-Retry Loop Drift is detected when:
+## Drift vs Retry Policy
 
-* retries increase
-* state does not change
-* verification does not improve
-* progress remains absent
+Retry Loop Drift is not triggered by retries alone.
+
+A retry policy becomes drift when:
+
+- retries continue increasing
+- state remains unchanged
+- strategy remains unchanged
+- verification does not improve
+- progress remains absent
+
+The issue is not repetition itself.
+
+The issue is repeated execution without evidence that success became more likely.
+
+## Detection Logic
+
+Governor evaluates:
+
+- retry growth
+- state change
+- strategy mutation
+- verification improvement
+- observable progress
 
 ## Example Output
 
@@ -51,20 +71,22 @@ Output:
 
 ```json
 {
-  "signal_score": 85,
-  "action": "STOP",
+  "signal_score": 95,
+  "action": "ESCALATE",
   "reasons": [
     "repeated_retry_without_state_change",
+    "no_strategy_mutation",
     "verification_stagnation",
     "progress_absent",
     "retry_loop_duration_exceeded"
   ]
 }
 ```
-Interpretation
 
-The system is not failing because the first attempt failed.
+## Interpretation
 
-It is failing because it continues retrying without evidence that the next attempt has a better chance of succeeding.
+Retry Loop Drift does not mean the system failed.
 
-Governor blocks the loop and requires review before further retries.
+It means the system continues attempting recovery without evidence that recovery became more likely.
+
+Governor escalates the task for review, intervention, or strategy change before resources are consumed indefinitely.

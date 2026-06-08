@@ -2,6 +2,7 @@
   "task_id": "task_014",
   "attempt_count": 12,
   "state_changed": false,
+  "strategy_changed": false,
   "verification_delta": 0,
   "progress_delta": 0,
   "last_error": "tool_timeout",
