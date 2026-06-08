@@ -145,6 +145,7 @@ Full taxonomy:
 | Case 012 | Silent Stall | REVIEW |
 | Case 013 | Judgment Drift | REVIEW |
 | Case 014 | Retry Loop Drift | STOP |
+| Case 015 | Trust Inheritance Drift | RESEARCH |
 
 Governor detects operational drift before visible failure appears.
 
