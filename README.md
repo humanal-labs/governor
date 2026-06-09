@@ -2,11 +2,13 @@
 
 Governor
 
+Modern autonomous systems may not fail by stopping.
+They may fail by continuing while becoming less trustworthy.
+
 Detecting divergence between operational health and actual trustworthiness in autonomous systems.
 
 Research Question:
 Can a system remain operationally healthy while becoming progressively less trustworthy?
-
 ---
 
 ## Why
