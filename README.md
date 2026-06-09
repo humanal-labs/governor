@@ -1,13 +1,11 @@
 # Governor
 
-Governor introduces review points before silent operational drift becomes operational cost.
+Governor
 
-It is not designed to make agents smarter.
+Detecting divergence between operational health and actual trustworthiness in autonomous systems.
 
-It is designed to restore the pause before expensive mistakes compound.
-
-The system can observe change,
-but it cannot decide alone what should be considered normal.
+Research Question:
+Can a system remain operationally healthy while becoming progressively less trustworthy?
 
 ---
 
