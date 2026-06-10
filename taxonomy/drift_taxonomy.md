@@ -1,102 +1,140 @@
-# Operational Drift Taxonomy
+ # Governor Drift Taxonomy v0.2
 
-Operational drift occurs when systems appear locally functional while systemic operational integrity degrades over time.
+Governor is not a hierarchy of failures.
 
-The goal is not to detect visible failure.
+It is a set of observational lenses for detecting divergence between operational health and actual trustworthiness in autonomous systems.
 
-The goal is to identify:
-- ambiguity
-- hidden non-progress
-- incoherent system state
-- false operational confidence
+A drift may appear in any lens first.
 
----
+A drift may remain isolated.
 
-## 1. Silent Failure Drift
-System stops progressing without explicit failure.
-
-Example:
-- active session
-- no execution progress
-- no terminal state
-
-Related:
-Case 012
+A drift may propagate across lenses.
 
 ---
 
-## 2. Semantic Drift
-Execution continues while operational meaning collapses.
+## Research Question
 
-Example:
-- empty tool arguments
-- successful execution with null outcome
-
-Related:
-Case 007
+Can a system remain operationally healthy while becoming progressively less trustworthy?
 
 ---
 
-## 3. Governance Drift
-Displayed controls diverge from actual enforcement behavior.
+## Core Principle
 
-Example:
-- rejected action still executes
-- configured limits ignored
+```text
+Observable Health
+≠
+Actual Trustworthiness
+ Operational health is not a truth signal.
 
-Related:
-Case 006
-Case 013
+It is only a set of observable indicators suggesting that a system is functioning as expected.
 
----
+⸻
 
-## 4. Observability Drift
-Monitoring layers diverge from execution reality.
+Observational Lenses
 
-Example:
-- healthy dashboard
-- stalled execution layer
+Execution Lens
 
-Related:
-Case 010
+Mismatch:
+ Health ≠ Execution
 
----
+The system appears alive, but work is not being executed.
 
-## 5. Recursive Drift
-Recovery or retry mechanisms reinforce instability.
+Related case:
+Case 010 — Health Illusion
+State & Behavioral Lens
 
-Example:
-- restart loops
-- self-calling deadlocks
-- retry storms
+Mismatch:
+State inconsistency
+or
+stalled progress
+The system is active, but state is unclear, stale, inconsistent, or behavior is no longer producing progress.
 
-Related:
-Case 001
-Case 002
-Case 003
-Case 009
+Related cases:
+Case 011 — State Desync
+Case 012 — Silent Stall
+Case 014 — Retry Loop Drift
 
----
+Judgment Lens
 
-## 6. State Desynchronization
-Different system layers report contradictory realities.
+Mismatch:
+Decision confidence
+≠
+Decision quality
+ The system continues making decisions, but the quality of judgment degrades.
 
-Example:
-- frontend STARTING
-- backend IDLE
-- task READY
+Related case:
+Case 013 — Judgment Drift
+Trust / Provenance Lens
 
-Related:
-Case 011
+Mismatch:
+ Trust > Provenance
+ The output appears trustworthy, but the evidence chain supporting that trust is weak, missing, or unverifiable.
 
----
+Related case:
+ Case 015 — Trust Inheritance Drift
+ Behavioral Trust Lens
 
-## 7. Recovery Drift
-Recovery mechanisms create secondary operational instability.
+Mismatch:
+ Healthy appearance
++
+progressive untrustworthiness
+ The system remains operationally healthy while becoming less trustworthy over time.
 
-Example:
-- restart succeeds
-- continuity silently lost
+Status:
+ Research hypothesis.
+ Detection remains incomplete.
+ Propagation Rules
 
-Related:
-Case 004
+Rule 1 — Persistence Amplifies Risk
+
+Persistent execution or state drift increases the risk of judgment drift.
+ Execution / State Drift
+→
+Judgment Risk ↑
+ Rule 2 — Unexplained Divergence Escalates
+
+Unexplained divergence between observable signals and expected trustworthiness increases behavioral trust risk.
+ Unexplained Divergence
+→
+Behavioral Trust Risk ↑
+ Rule 3 — Cross-Layer Inconsistency Triggers REVIEW
+
+When different lenses disagree, Governor should not assume the system is safe.
+ Health = Green
+Progress = Zero
+ Trust = High
+Evidence = Weak
+ Execution = Good
+Judgment = Poor
+ These patterns trigger REVIEW.
+
+⸻
+
+REVIEW Logic
+
+Governor may issue REVIEW when:
+ Confidence > Evidence
+ Or
+ Cross-layer inconsistency exists
+ Or
+ Divergence persists without explanation
+ REVIEW does not assume failure.
+
+ REVIEW assumes uncertainty.
+
+⸻
+Case Mapping
+Case 010 → Execution Lens
+Case 011 → State & Behavioral Lens
+Case 012 → State & Behavioral Lens
+Case 013 → Judgment Lens
+Case 014 → State & Behavioral Lens
+Case 015 → Trust / Provenance Lens
+
+ Current Status
+
+Draft v0.2.
+
+This taxonomy is exploratory.
+
+The lenses may change as new cases are studied
