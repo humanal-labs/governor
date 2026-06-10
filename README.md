@@ -1,140 +1,86 @@
 # Governor
 
-Governor
+Governor is not a trust detector.
 
-Modern autonomous systems may not fail by stopping.
-They may fail by continuing while becoming less trustworthy.
+Governor is a research framework for observing divergence between observable signals and operational reality.
 
-Detecting divergence between operational health and actual trustworthiness in autonomous systems.
+## Research Question
 
-Research Question:
 Can a system remain operationally healthy while becoming progressively less trustworthy?
----
 
-## Why
+Governor does not currently answer this question.
 
-Agent systems often fail quietly.
-
-A single action may look correct.  
-A single tool call may succeed.  
-A single step may pass.
-
-But across the workflow, behavior can drift:
-
-- retries increase
-- latency shifts
-- tempo changes
-- assumptions persist
-- small corrections become normal
-
-Individually correct.  
-Systemically wrong.
-
-Governor adds a review point before that drift compounds into operational cost.
+Instead, it studies patterns of divergence that may emerge between what a system appears to be doing and what it is actually doing.
 
 ---
 
-## The Problem
+## Core Principle
 
-When systems speed up, informal checks disappear first.
+Observable Health
+≠
+Operational Reality
 
-People trust the system more.  
-Or move things through to preserve flow.
+Operational health is not a truth signal.
 
-What remains is fast execution,
-without the moment that catches drift.
+It is only a collection of observable indicators suggesting that a system is functioning as expected.
 
-Executed individually, actions appear reasonable.  
-Executed continuously, patterns begin to diverge.
+A single signal may be misleading.
 
-You don’t lose control immediately.
-
-You lose early warning.
+Divergence between signals is often more informative than the signals themselves.
 
 ---
 
-## What Governor Is
+## Why Governor Exists
 
-Governor is a lightweight runtime layer for detecting silent operational drift in AI agent workflows.
+Modern agent systems rarely fail through obvious crashes.
 
-It does not evaluate intelligence.
+They may remain:
 
-It evaluates operational coherence over time.
+- healthy
+- available
+- responsive
+- policy-compliant
 
-Governor introduces review moments only when operational patterns deviate from expected behavior.
+while simultaneously becoming:
 
-Quiet most of the time.  
-Meaningful when triggered.
+- stalled
+- misaligned
+- inconsistent
+- less trustworthy
 
----
-
-## What Governor Is Not
-
-Governor is not:
-
-- a sandbox
-- a policy engine
-- a full security system
-- an alignment solution
-- a replacement for human review
-- a guarantee against agent failure
-
-It is an operational drift detection layer.
-
----
-## Quick Start
-
-Run the demo:
-
-```bash
-python core/demo.py
-Governor simulates runtime drift signals and triggers REVIEW or STOP before silent failure compounds.
-
-Example output:⚠️ GOVERNOR TRIGGERED
-Reason: High confidence masking degraded verification
-Action: REVIEW
+Governor studies these divergence patterns.
 
 ---
 
-## The Fix
+## Observational Lenses
 
-We do not add friction everywhere.
+Governor currently observes divergence through five lenses:
 
-We restore the missing control point.
+- Execution Lens
+- State & Behavioral Lens
+- Judgment Lens
+- Trust & Provenance Lens
+- Behavioral Trust Lens
 
-A lightweight governor, triggered only when signals suggest drift.
+These are not stages.
 
-Not a blocker.  
-A control point.
+These are observational perspectives.
 
-Quiet most of the time.  
-Meaningful when it appears.
+A divergence may emerge in any lens and may propagate across multiple lenses.
 
 ---
 
-## Cases
+## REVIEW Philosophy
 
-| Case | Pattern | Description |
-|------|------|------|
-| 010 | Dead Execution | System healthy, execution stopped |
-| 011 | State Desync | Frontend/backend disagreement |
-| 012 | Silent Stall | Session active, no progress |
+Governor does not assume that positive signals imply trustworthy behavior.
 
-## Drift Taxonomy
+When divergence appears between observable signals and operational reality, Governor may issue:
 
-Governor organizes operational drift into observable runtime patterns.
+REVIEW
 
-See:
-- Silent Failure Drift
-- Semantic Drift
-- Governance Drift
-- Observability Drift
-- Recursive Drift
-- State Desynchronization
-- Recovery Drift
+A REVIEW is not proof of failure.
 
-Full taxonomy:
-`taxonomy/drift_taxonomy.md`
+It is a signal that confidence in the system may no longer be fully supported by available evidence.
 
 ## Runtime Replays
 

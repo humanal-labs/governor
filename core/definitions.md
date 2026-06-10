@@ -18,10 +18,16 @@ Execution = 0
 Case
 Case 010
 Trustworthiness
+Operational Reality
 
+The actual state of system behavior,
+regardless of what observable indicators suggest.
+
+Operational reality may be partially observable,
+incorrectly represented,
+or entirely hidden from operators.
 Definition
 Trustworthiness:
-
 The degree to which
 a system's behavior
 is supported by evidence.
